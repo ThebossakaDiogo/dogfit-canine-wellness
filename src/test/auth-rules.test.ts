@@ -3,7 +3,7 @@ import { canAccessApp, RESEND_COOLDOWN_SECONDS, MIN_PASSWORD_LENGTH } from "@/li
 
 describe("DogFit auth rules", () => {
   it("blocks users whose email is not confirmed", () => {
-    expect(canAccessApp({ email_confirmed_at: undefined })).toBe(false);
+    expect(canAccessApp({})).toBe(false);
   });
   it("allows users with confirmed email", () => {
     expect(canAccessApp({ email_confirmed_at: "2026-10-27T00:00:00Z" })).toBe(true);
