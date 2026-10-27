@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 
-export function AuthShell({ title, subtitle, children }: { title: string; subtitle?: string; children: ReactNode }) {
+export function AuthShell({ title, subtitle, children }: { title: string; subtitle?: string; children?: ReactNode }) {
   return (
     <main className="flex min-h-screen items-center justify-center bg-background px-5 py-10">
       <div className="w-full max-w-md">
