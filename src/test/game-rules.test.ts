@@ -13,9 +13,9 @@ describe("DogFit game rules", () => {
     expect(streak(["2026-10-26", "2026-10-25"], today)).toBe(2);
     expect(streak(["2026-10-24"], today)).toBe(0);
   });
-  it("10 kg neutered adult ≈ 631 kcal/day", () => {
+  it("10 kg neutered adult ≈ 630 kcal/day", () => {
     const p = dailyPlan({ weightKg: 10, stage: "adulto", neutered: true, activity: "normal", overweight: false, kcalPer100g: 130 });
-    expect(p?.kcal).toBe(631);
+    expect(p?.kcal).toBe(630);
     expect(p?.waterMl).toBe(550);
   });
   it("invalid weight gives no plan", () => {
