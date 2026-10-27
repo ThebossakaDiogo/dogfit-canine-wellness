@@ -14,7 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      dogs: {
+        Row: {
+          allergies: string | null
+          breed: string | null
+          created_at: string
+          id: string
+          life_stage: string
+          name: string
+          owner_id: string
+          size: string
+          weight_kg: number | null
+        }
+        Insert: {
+          allergies?: string | null
+          breed?: string | null
+          created_at?: string
+          id?: string
+          life_stage?: string
+          name: string
+          owner_id?: string
+          size?: string
+          weight_kg?: number | null
+        }
+        Update: {
+          allergies?: string | null
+          breed?: string | null
+          created_at?: string
+          id?: string
+          life_stage?: string
+          name?: string
+          owner_id?: string
+          size?: string
+          weight_kg?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
