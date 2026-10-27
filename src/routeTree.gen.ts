@@ -16,7 +16,10 @@ import { Route as ConfirmadoRouteImport } from './routes/confirmado'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as VerificaRouteImport } from './routes/verifica'
 import { Route as AuthenticatedBibliotecaRouteImport } from './routes/_authenticated.biblioteca'
+import { Route as AuthenticatedCalculadoraRouteImport } from './routes/_authenticated.calculadora'
 import { Route as AuthenticatedCuentaRouteImport } from './routes/_authenticated.cuenta'
+import { Route as AuthenticatedDiarioRouteImport } from './routes/_authenticated.diario'
+import { Route as AuthenticatedHoyRouteImport } from './routes/_authenticated.hoy'
 import { Route as AuthenticatedPerrosRouteImport } from './routes/_authenticated.perros'
 import { Route as AuthenticatedRecetaIdRouteImport } from './routes/_authenticated.receta.$id'
 
@@ -54,9 +57,25 @@ const AuthenticatedBibliotecaRoute = AuthenticatedBibliotecaRouteImport.update({
   path: '/biblioteca',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedCalculadoraRoute =
+  AuthenticatedCalculadoraRouteImport.update({
+    id: '/calculadora',
+    path: '/calculadora',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedCuentaRoute = AuthenticatedCuentaRouteImport.update({
   id: '/cuenta',
   path: '/cuenta',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedDiarioRoute = AuthenticatedDiarioRouteImport.update({
+  id: '/diario',
+  path: '/diario',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedHoyRoute = AuthenticatedHoyRouteImport.update({
+  id: '/hoy',
+  path: '/hoy',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 const AuthenticatedPerrosRoute = AuthenticatedPerrosRouteImport.update({
@@ -77,7 +96,10 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/verifica': typeof VerificaRoute
   '/biblioteca': typeof AuthenticatedBibliotecaRoute
+  '/calculadora': typeof AuthenticatedCalculadoraRoute
   '/cuenta': typeof AuthenticatedCuentaRoute
+  '/diario': typeof AuthenticatedDiarioRoute
+  '/hoy': typeof AuthenticatedHoyRoute
   '/perros': typeof AuthenticatedPerrosRoute
   '/receta/$id': typeof AuthenticatedRecetaIdRoute
 }
@@ -88,7 +110,10 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/verifica': typeof VerificaRoute
   '/biblioteca': typeof AuthenticatedBibliotecaRoute
+  '/calculadora': typeof AuthenticatedCalculadoraRoute
   '/cuenta': typeof AuthenticatedCuentaRoute
+  '/diario': typeof AuthenticatedDiarioRoute
+  '/hoy': typeof AuthenticatedHoyRoute
   '/perros': typeof AuthenticatedPerrosRoute
   '/receta/$id': typeof AuthenticatedRecetaIdRoute
 }
@@ -101,7 +126,10 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/verifica': typeof VerificaRoute
   '/_authenticated/biblioteca': typeof AuthenticatedBibliotecaRoute
+  '/_authenticated/calculadora': typeof AuthenticatedCalculadoraRoute
   '/_authenticated/cuenta': typeof AuthenticatedCuentaRoute
+  '/_authenticated/diario': typeof AuthenticatedDiarioRoute
+  '/_authenticated/hoy': typeof AuthenticatedHoyRoute
   '/_authenticated/perros': typeof AuthenticatedPerrosRoute
   '/_authenticated/receta/$id': typeof AuthenticatedRecetaIdRoute
 }
@@ -114,7 +142,10 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/verifica'
     | '/biblioteca'
+    | '/calculadora'
     | '/cuenta'
+    | '/diario'
+    | '/hoy'
     | '/perros'
     | '/receta/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -125,7 +156,10 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/verifica'
     | '/biblioteca'
+    | '/calculadora'
     | '/cuenta'
+    | '/diario'
+    | '/hoy'
     | '/perros'
     | '/receta/$id'
   id:
@@ -137,7 +171,10 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/verifica'
     | '/_authenticated/biblioteca'
+    | '/_authenticated/calculadora'
     | '/_authenticated/cuenta'
+    | '/_authenticated/diario'
+    | '/_authenticated/hoy'
     | '/_authenticated/perros'
     | '/_authenticated/receta/$id'
   fileRoutesById: FileRoutesById
@@ -202,11 +239,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedBibliotecaRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/calculadora': {
+      id: '/_authenticated/calculadora'
+      path: '/calculadora'
+      fullPath: '/calculadora'
+      preLoaderRoute: typeof AuthenticatedCalculadoraRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/cuenta': {
       id: '/_authenticated/cuenta'
       path: '/cuenta'
       fullPath: '/cuenta'
       preLoaderRoute: typeof AuthenticatedCuentaRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/diario': {
+      id: '/_authenticated/diario'
+      path: '/diario'
+      fullPath: '/diario'
+      preLoaderRoute: typeof AuthenticatedDiarioRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/hoy': {
+      id: '/_authenticated/hoy'
+      path: '/hoy'
+      fullPath: '/hoy'
+      preLoaderRoute: typeof AuthenticatedHoyRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/perros': {
@@ -228,14 +286,20 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteChildren {
   AuthenticatedBibliotecaRoute: typeof AuthenticatedBibliotecaRoute
+  AuthenticatedCalculadoraRoute: typeof AuthenticatedCalculadoraRoute
   AuthenticatedCuentaRoute: typeof AuthenticatedCuentaRoute
+  AuthenticatedDiarioRoute: typeof AuthenticatedDiarioRoute
+  AuthenticatedHoyRoute: typeof AuthenticatedHoyRoute
   AuthenticatedPerrosRoute: typeof AuthenticatedPerrosRoute
   AuthenticatedRecetaIdRoute: typeof AuthenticatedRecetaIdRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedBibliotecaRoute: AuthenticatedBibliotecaRoute,
+  AuthenticatedCalculadoraRoute: AuthenticatedCalculadoraRoute,
   AuthenticatedCuentaRoute: AuthenticatedCuentaRoute,
+  AuthenticatedDiarioRoute: AuthenticatedDiarioRoute,
+  AuthenticatedHoyRoute: AuthenticatedHoyRoute,
   AuthenticatedPerrosRoute: AuthenticatedPerrosRoute,
   AuthenticatedRecetaIdRoute: AuthenticatedRecetaIdRoute,
 }

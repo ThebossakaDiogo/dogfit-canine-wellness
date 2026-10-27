@@ -1,3 +1,8 @@
+import pollo from "@/assets/recipe-pollo.jpg";
+import pavo from "@/assets/recipe-pavo.jpg";
+import res from "@/assets/recipe-res.jpg";
+import pescado from "@/assets/recipe-pescado.jpg";
+
 // Recetas de MUESTRA. Deben ser reemplazadas por recetas revisadas por un profesional antes de vender.
 export type LifeStage = "cachorro" | "adulto" | "senior";
 export type DogSize = "pequeño" | "mediano" | "grande";
@@ -9,6 +14,7 @@ export type Recipe = {
   sizes: DogSize[];
   minutes: number;
   summary: string;
+  image: string;
   ingredients: string[];
   steps: string[];
   warning?: string;
@@ -19,6 +25,7 @@ const ALL_SIZES: DogSize[] = ["pequeño", "mediano", "grande"];
 export const RECIPES: Recipe[] = [
   {
     id: "pollo-arroz-zanahoria",
+    image: pollo,
     name: "Pollo con arroz y zanahoria",
     stages: ["adulto", "senior"],
     sizes: ALL_SIZES,
@@ -30,6 +37,7 @@ export const RECIPES: Recipe[] = [
   },
   {
     id: "pavo-calabaza",
+    image: pavo,
     name: "Pavo con calabaza",
     stages: ["adulto"],
     sizes: ALL_SIZES,
@@ -40,6 +48,7 @@ export const RECIPES: Recipe[] = [
   },
   {
     id: "res-batata-senior",
+    image: res,
     name: "Res magra con batata",
     stages: ["senior"],
     sizes: ["mediano", "grande"],
@@ -50,6 +59,7 @@ export const RECIPES: Recipe[] = [
   },
   {
     id: "pescado-arroz-cachorro",
+    image: pescado,
     name: "Pescado blanco con arroz",
     stages: ["cachorro", "adulto"],
     sizes: ["pequeño", "mediano"],

@@ -30,7 +30,7 @@ function Onboarding() {
 
   useEffect(() => {
     if (loading) return;
-    if (canAccessApp(user)) navigate({ to: "/biblioteca" });
+    if (canAccessApp(user)) navigate({ to: "/hoy" });
     else if (localStorage.getItem(ONBOARDING_KEY)) navigate({ to: "/auth" });
   }, [user, loading, navigate]);
 

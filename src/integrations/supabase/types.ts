@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      activities: {
+        Row: {
+          created_at: string
+          day: string
+          id: string
+          kind: string
+          user_id: string
+          xp: number
+        }
+        Insert: {
+          created_at?: string
+          day?: string
+          id?: string
+          kind: string
+          user_id?: string
+          xp?: number
+        }
+        Update: {
+          created_at?: string
+          day?: string
+          id?: string
+          kind?: string
+          user_id?: string
+          xp?: number
+        }
+        Relationships: []
+      }
       dogs: {
         Row: {
           allergies: string | null
@@ -49,6 +76,41 @@ export type Database = {
           weight_kg?: number | null
         }
         Relationships: []
+      }
+      weight_logs: {
+        Row: {
+          created_at: string
+          dog_id: string
+          id: string
+          logged_on: string
+          user_id: string
+          weight_kg: number
+        }
+        Insert: {
+          created_at?: string
+          dog_id: string
+          id?: string
+          logged_on?: string
+          user_id?: string
+          weight_kg: number
+        }
+        Update: {
+          created_at?: string
+          dog_id?: string
+          id?: string
+          logged_on?: string
+          user_id?: string
+          weight_kg?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "weight_logs_dog_id_fkey"
+            columns: ["dog_id"]
+            isOneToOne: false
+            referencedRelation: "dogs"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
