@@ -33,10 +33,9 @@ function Verify() {
 
   async function resend() {
     if (!email) return;
-    const { error } = await supabase.auth.resend({
-      type: "signup",
+    const { error } = await supabase.auth.signInWithOtp({
       email,
-      options: { emailRedirectTo: `${window.location.origin}/confirmado` },
+      options: { shouldCreateUser: false, emailRedirectTo: `${window.location.origin}/confirmado` },
     });
     if (error) toast.error("No pudimos reenviar el correo. Espera un poco e inténtalo de nuevo.");
     else toast.success("Correo reenviado.");
@@ -44,7 +43,7 @@ function Verify() {
   }
 
   return (
-    <AuthShell title="Revisa tu correo" subtitle="Te enviamos un enlace para confirmar tu cuenta.">
+    <AuthShell title="Revisa tu correo" subtitle="Este correo ya tiene cuenta. Te enviamos un enlace para entrar en este dispositivo.">
       <div className="mb-6 flex items-center gap-3 rounded-2xl bg-secondary p-4">
         <MailCheck className="h-6 w-6 shrink-0 text-primary" />
         <p className="text-sm">
@@ -55,8 +54,8 @@ function Verify() {
         {left > 0 ? `Reenviar correo (${left}s)` : "Reenviar correo"}
       </Button>
       <div className="mt-5 flex justify-between text-sm">
-        <Link to="/auth" search={{ mode: "signup" }} className="text-muted-foreground hover:text-foreground">Cambiar correo</Link>
-        <Link to="/auth" search={{ mode: "login" }} className="font-semibold text-primary">Ya confirmé, entrar</Link>
+        <Link to="/auth" className="text-muted-foreground hover:text-foreground">Cambiar correo</Link>
+        <Link to="/auth" className="font-semibold text-primary">Volver</Link>
       </div>
     </AuthShell>
   );

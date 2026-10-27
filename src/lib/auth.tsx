@@ -25,7 +25,6 @@ export const useAuth = () => useContext(AuthContext);
 
 export const ONBOARDING_KEY = "dogfit_onboarding_done";
 export const RESEND_COOLDOWN_SECONDS = 60;
-export const MIN_PASSWORD_LENGTH = 8;
 
 /** A user may only enter the paid areas once their email is confirmed. */
 export function canAccessApp(user: Pick<User, "email_confirmed_at"> | null): boolean {
