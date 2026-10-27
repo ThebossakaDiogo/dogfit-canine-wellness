@@ -56,6 +56,7 @@ function AuthPage() {
         });
         if (error) {
           if (error.message.toLowerCase().includes("weak")) throw new Error("Esa contraseña es muy común. Elige otra más segura.");
+          if (error.message.toLowerCase().includes("not allowed")) throw new Error("Ese correo no es válido. Usa un correo real.");
           throw error;
         }
         navigate({ to: "/verifica", search: { email } });
