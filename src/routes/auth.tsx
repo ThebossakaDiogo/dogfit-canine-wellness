@@ -54,7 +54,11 @@ function AuthPage() {
           password,
           options: { emailRedirectTo: `${window.location.origin}/confirmado` },
         });
-        if (error) throw error;
+        if (error) {
+          if (error.message.toLowerCase().includes("weak")) throw new Error("Esa contraseña es muy común. Elige otra más segura.");
+          if (error.message.toLowerCase().includes("not allowed")) throw new Error("Ese correo no es válido. Usa un correo real.");
+          throw error;
+        }
         navigate({ to: "/verifica", search: { email } });
       } else if (mode === "login") {
         const { error } = await supabase.auth.signInWithPassword({ email, password });

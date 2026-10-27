@@ -39,7 +39,7 @@ function Onboarding() {
     navigate({ to: "/auth", search: { mode } });
   };
 
-  const slide = SLIDES[i];
+  const slide = SLIDES[i] ?? SLIDES[0]!;
   const Icon = slide.icon;
   const last = i === SLIDES.length - 1;
 
