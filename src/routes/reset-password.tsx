@@ -35,7 +35,7 @@ function Reset() {
       return;
     }
     toast.success("Contraseña actualizada.");
-    navigate({ to: "/biblioteca" });
+    navigate({ to: "/hoy" });
   }
 
   return (

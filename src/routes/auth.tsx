@@ -34,7 +34,7 @@ function AuthPage() {
   const [unconfirmed, setUnconfirmed] = useState(false);
 
   useEffect(() => {
-    if (canAccessApp(user)) navigate({ to: "/biblioteca" });
+    if (canAccessApp(user)) navigate({ to: "/hoy" });
   }, [user, navigate]);
 
   const setMode = (m: "login" | "signup" | "forgot") => navigate({ to: "/auth", search: { mode: m } });
