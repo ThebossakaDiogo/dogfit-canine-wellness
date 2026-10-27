@@ -10,5 +10,5 @@
 <!-- LOVABLE:END -->
 
 ## Architecture rules
-- Signed-in pages live under the `_authenticated` pathless layout, which redirects anyone without a confirmed email to /auth; why: the PRD requires email approval before any access.
+- Signed-in pages live under the `_authenticated` pathless layout, which redirects anyone without a confirmed email to /auth; entry is email-only (random hidden password on signup, email link for returning emails); why: no password UX while still proving email ownership for existing accounts.
 - Recipe content is static in `src/lib/recipes.ts` until a reviewed catalog exists; why: content must be approved before it goes in the database.
