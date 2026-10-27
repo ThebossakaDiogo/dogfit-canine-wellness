@@ -52,7 +52,7 @@ function Confirmed() {
           <Link to="/perros">Añadir mi perro</Link>
         </Button>
         <Button asChild variant="ghost" size="xl" className="w-full rounded-full">
-          <Link to="/biblioteca">Ir a la biblioteca</Link>
+          <Link to="/hoy">Empezar</Link>
         </Button>
       </div>
     </AuthShell>

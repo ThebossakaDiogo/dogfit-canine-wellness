@@ -1,6 +1,8 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, Clock, TriangleAlert } from "lucide-react";
 import { RECIPES } from "@/lib/recipes";
+import { Button } from "@/components/ui/button";
+import { useAward, useGame } from "@/lib/useGame";
 
 export const Route = createFileRoute("/_authenticated/receta/$id")({
   loader: ({ params }) => {
@@ -22,9 +24,13 @@ export const Route = createFileRoute("/_authenticated/receta/$id")({
 
 function RecipePage() {
   const { recipe: r } = Route.useLoaderData();
+  const award = useAward();
+  const { doneToday } = useGame();
+  const cooked = doneToday.has("receta");
   return (
     <article className="mx-auto max-w-2xl space-y-6">
       <Link to="/biblioteca" className="inline-flex items-center gap-1 text-sm font-semibold text-muted-foreground hover:text-foreground"><ArrowLeft className="h-4 w-4" /> Biblioteca</Link>
+      <img src={r.image} alt={r.name} width={944} height={704} className="animate-pop h-64 w-full rounded-3xl object-cover md:h-80" />
       <header>
         <h1 className="text-4xl font-extrabold">{r.name}</h1>
         <p className="mt-2 text-muted-foreground">{r.summary}</p>
@@ -45,6 +51,10 @@ function RecipePage() {
         <h2 className="text-xl font-bold">Preparación</h2>
         <ol className="mt-3 list-decimal space-y-2 pl-5">{r.steps.map((s) => <li key={s}>{s}</li>)}</ol>
       </section>
+      <Button variant="hero" size="xl" className="w-full" disabled={cooked || award.isPending} onClick={() => award.mutate("receta")}>
+        {cooked ? "¡Preparada hoy! ✓" : "La preparé · +20 XP"}
+      </Button>
+      <Link to="/calculadora" className="block text-center text-sm font-semibold text-primary">Calcula cuántos gramos servir →</Link>
       <p className="text-xs text-muted-foreground">Las porciones dependen del peso y la salud de tu perro. Consulta a tu veterinario.</p>
     </article>
   );
