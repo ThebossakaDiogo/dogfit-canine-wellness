@@ -48,13 +48,16 @@ function Library() {
       ) : (
         <div className="grid gap-4 sm:grid-cols-2">
           {list.map((r) => (
-            <Link key={r.id} to="/receta/$id" params={{ id: r.id }} className="group rounded-3xl bg-card p-5 shadow-card transition hover:-translate-y-0.5">
+            <Link key={r.id} to="/receta/$id" params={{ id: r.id }} className="group overflow-hidden rounded-3xl bg-card shadow-card transition hover:-translate-y-1">
+              <img src={r.image} alt={r.name} loading="lazy" width={944} height={704} className="h-44 w-full object-cover transition duration-500 group-hover:scale-105" />
+              <div className="p-5">
               <div className="flex flex-wrap gap-1.5">
                 {r.stages.map((s) => <span key={s} className="rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold capitalize text-secondary-foreground">{s}</span>)}
               </div>
               <h2 className="mt-3 text-xl font-bold group-hover:text-primary">{r.name}</h2>
               <p className="mt-1 text-sm text-muted-foreground">{r.summary}</p>
-              <p className="mt-3 flex items-center gap-1 text-xs text-muted-foreground"><Clock className="h-3.5 w-3.5" /> {r.minutes} min</p>
+              <p className="mt-3 flex items-center gap-1 text-xs text-muted-foreground"><Clock className="h-3.5 w-3.5" /> {r.minutes} min · +20 XP</p>
+              </div>
             </Link>
           ))}
         </div>
