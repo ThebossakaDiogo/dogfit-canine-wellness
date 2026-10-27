@@ -10,33 +10,145 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ConfirmadoRouteImport } from './routes/confirmado'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as VerificaRouteImport } from './routes/verifica'
+import { Route as AuthenticatedBibliotecaRouteImport } from './routes/_authenticated.biblioteca'
+import { Route as AuthenticatedCuentaRouteImport } from './routes/_authenticated.cuenta'
+import { Route as AuthenticatedPerrosRouteImport } from './routes/_authenticated.perros'
+import { Route as AuthenticatedRecetaIdRouteImport } from './routes/_authenticated.receta.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRoute = AuthenticatedRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfirmadoRoute = ConfirmadoRouteImport.update({
+  id: '/confirmado',
+  path: '/confirmado',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerificaRoute = VerificaRouteImport.update({
+  id: '/verifica',
+  path: '/verifica',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedBibliotecaRoute = AuthenticatedBibliotecaRouteImport.update({
+  id: '/biblioteca',
+  path: '/biblioteca',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedCuentaRoute = AuthenticatedCuentaRouteImport.update({
+  id: '/cuenta',
+  path: '/cuenta',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedPerrosRoute = AuthenticatedPerrosRouteImport.update({
+  id: '/perros',
+  path: '/perros',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedRecetaIdRoute = AuthenticatedRecetaIdRouteImport.update({
+  id: '/receta/$id',
+  path: '/receta/$id',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/confirmado': typeof ConfirmadoRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/verifica': typeof VerificaRoute
+  '/biblioteca': typeof AuthenticatedBibliotecaRoute
+  '/cuenta': typeof AuthenticatedCuentaRoute
+  '/perros': typeof AuthenticatedPerrosRoute
+  '/receta/$id': typeof AuthenticatedRecetaIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/confirmado': typeof ConfirmadoRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/verifica': typeof VerificaRoute
+  '/biblioteca': typeof AuthenticatedBibliotecaRoute
+  '/cuenta': typeof AuthenticatedCuentaRoute
+  '/perros': typeof AuthenticatedPerrosRoute
+  '/receta/$id': typeof AuthenticatedRecetaIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/confirmado': typeof ConfirmadoRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/verifica': typeof VerificaRoute
+  '/_authenticated/biblioteca': typeof AuthenticatedBibliotecaRoute
+  '/_authenticated/cuenta': typeof AuthenticatedCuentaRoute
+  '/_authenticated/perros': typeof AuthenticatedPerrosRoute
+  '/_authenticated/receta/$id': typeof AuthenticatedRecetaIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/confirmado'
+    | '/reset-password'
+    | '/verifica'
+    | '/biblioteca'
+    | '/cuenta'
+    | '/perros'
+    | '/receta/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/confirmado'
+    | '/reset-password'
+    | '/verifica'
+    | '/biblioteca'
+    | '/cuenta'
+    | '/perros'
+    | '/receta/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/confirmado'
+    | '/reset-password'
+    | '/verifica'
+    | '/_authenticated/biblioteca'
+    | '/_authenticated/cuenta'
+    | '/_authenticated/perros'
+    | '/_authenticated/receta/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  ConfirmadoRoute: typeof ConfirmadoRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
+  VerificaRoute: typeof VerificaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +160,97 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/confirmado': {
+      id: '/confirmado'
+      path: '/confirmado'
+      fullPath: '/confirmado'
+      preLoaderRoute: typeof ConfirmadoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verifica': {
+      id: '/verifica'
+      path: '/verifica'
+      fullPath: '/verifica'
+      preLoaderRoute: typeof VerificaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/biblioteca': {
+      id: '/_authenticated/biblioteca'
+      path: '/biblioteca'
+      fullPath: '/biblioteca'
+      preLoaderRoute: typeof AuthenticatedBibliotecaRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/cuenta': {
+      id: '/_authenticated/cuenta'
+      path: '/cuenta'
+      fullPath: '/cuenta'
+      preLoaderRoute: typeof AuthenticatedCuentaRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/perros': {
+      id: '/_authenticated/perros'
+      path: '/perros'
+      fullPath: '/perros'
+      preLoaderRoute: typeof AuthenticatedPerrosRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/receta/$id': {
+      id: '/_authenticated/receta/$id'
+      path: '/receta/$id'
+      fullPath: '/receta/$id'
+      preLoaderRoute: typeof AuthenticatedRecetaIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
+interface AuthenticatedRouteChildren {
+  AuthenticatedBibliotecaRoute: typeof AuthenticatedBibliotecaRoute
+  AuthenticatedCuentaRoute: typeof AuthenticatedCuentaRoute
+  AuthenticatedPerrosRoute: typeof AuthenticatedPerrosRoute
+  AuthenticatedRecetaIdRoute: typeof AuthenticatedRecetaIdRoute
+}
+
+const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedBibliotecaRoute: AuthenticatedBibliotecaRoute,
+  AuthenticatedCuentaRoute: AuthenticatedCuentaRoute,
+  AuthenticatedPerrosRoute: AuthenticatedPerrosRoute,
+  AuthenticatedRecetaIdRoute: AuthenticatedRecetaIdRoute,
+}
+
+const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
+  AuthenticatedRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRoute: AuthenticatedRouteWithChildren,
+  AuthRoute: AuthRoute,
+  ConfirmadoRoute: ConfirmadoRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
+  VerificaRoute: VerificaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

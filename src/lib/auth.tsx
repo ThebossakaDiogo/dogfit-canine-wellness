@@ -1,0 +1,33 @@
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import type { Session, User } from "@supabase/supabase-js";
+import { supabase } from "@/integrations/supabase/client";
+
+type AuthState = { user: User | null; session: Session | null; loading: boolean };
+const AuthContext = createContext<AuthState>({ user: null, session: null, loading: true });
+
+export function AuthProvider({ children }: { children: ReactNode }) {
+  const [state, setState] = useState<AuthState>({ user: null, session: null, loading: true });
+
+  useEffect(() => {
+    const { data } = supabase.auth.onAuthStateChange((_e, session) => {
+      setState({ user: session?.user ?? null, session, loading: false });
+    });
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setState({ user: session?.user ?? null, session, loading: false });
+    });
+    return () => data.subscription.unsubscribe();
+  }, []);
+
+  return <AuthContext.Provider value={state}>{children}</AuthContext.Provider>;
+}
+
+export const useAuth = () => useContext(AuthContext);
+
+export const ONBOARDING_KEY = "dogfit_onboarding_done";
+export const RESEND_COOLDOWN_SECONDS = 60;
+export const MIN_PASSWORD_LENGTH = 8;
+
+/** A user may only enter the paid areas once their email is confirmed. */
+export function canAccessApp(user: Pick<User, "email_confirmed_at"> | null): boolean {
+  return !!user?.email_confirmed_at;
+}
