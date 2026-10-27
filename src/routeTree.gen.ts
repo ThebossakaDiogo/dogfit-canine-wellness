@@ -13,7 +13,6 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ConfirmadoRouteImport } from './routes/confirmado'
-import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as VerificaRouteImport } from './routes/verifica'
 import { Route as AuthenticatedBibliotecaRouteImport } from './routes/_authenticated.biblioteca'
 import { Route as AuthenticatedCalculadoraRouteImport } from './routes/_authenticated.calculadora'
@@ -40,11 +39,6 @@ const AuthRoute = AuthRouteImport.update({
 const ConfirmadoRoute = ConfirmadoRouteImport.update({
   id: '/confirmado',
   path: '/confirmado',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResetPasswordRoute = ResetPasswordRouteImport.update({
-  id: '/reset-password',
-  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const VerificaRoute = VerificaRouteImport.update({
@@ -93,7 +87,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/confirmado': typeof ConfirmadoRoute
-  '/reset-password': typeof ResetPasswordRoute
   '/verifica': typeof VerificaRoute
   '/biblioteca': typeof AuthenticatedBibliotecaRoute
   '/calculadora': typeof AuthenticatedCalculadoraRoute
@@ -107,7 +100,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/confirmado': typeof ConfirmadoRoute
-  '/reset-password': typeof ResetPasswordRoute
   '/verifica': typeof VerificaRoute
   '/biblioteca': typeof AuthenticatedBibliotecaRoute
   '/calculadora': typeof AuthenticatedCalculadoraRoute
@@ -123,7 +115,6 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/auth': typeof AuthRoute
   '/confirmado': typeof ConfirmadoRoute
-  '/reset-password': typeof ResetPasswordRoute
   '/verifica': typeof VerificaRoute
   '/_authenticated/biblioteca': typeof AuthenticatedBibliotecaRoute
   '/_authenticated/calculadora': typeof AuthenticatedCalculadoraRoute
@@ -139,7 +130,6 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/confirmado'
-    | '/reset-password'
     | '/verifica'
     | '/biblioteca'
     | '/calculadora'
@@ -153,7 +143,6 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/confirmado'
-    | '/reset-password'
     | '/verifica'
     | '/biblioteca'
     | '/calculadora'
@@ -168,7 +157,6 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/confirmado'
-    | '/reset-password'
     | '/verifica'
     | '/_authenticated/biblioteca'
     | '/_authenticated/calculadora'
@@ -184,7 +172,6 @@ export interface RootRouteChildren {
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   AuthRoute: typeof AuthRoute
   ConfirmadoRoute: typeof ConfirmadoRoute
-  ResetPasswordRoute: typeof ResetPasswordRoute
   VerificaRoute: typeof VerificaRoute
 }
 
@@ -216,13 +203,6 @@ declare module '@tanstack/react-router' {
       path: '/confirmado'
       fullPath: '/confirmado'
       preLoaderRoute: typeof ConfirmadoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/reset-password': {
-      id: '/reset-password'
-      path: '/reset-password'
-      fullPath: '/reset-password'
-      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/verifica': {
@@ -313,7 +293,6 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   AuthRoute: AuthRoute,
   ConfirmadoRoute: ConfirmadoRoute,
-  ResetPasswordRoute: ResetPasswordRoute,
   VerificaRoute: VerificaRoute,
 }
 export const routeTree = rootRouteImport
